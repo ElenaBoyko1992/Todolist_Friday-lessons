@@ -1,6 +1,6 @@
 import { tasksActions, tasksReducer, TasksStateType, } from './tasks-reducer'
 import { TaskPriorities, TaskStatuses } from 'api/todolists-api'
-import { todolistsActions } from 'features/TodolistsList/todolists-reducer';
+import {todolistsActions, todolistsReducer} from 'features/TodolistsList/todolists-reducer';
 
 let startState: TasksStateType = {};
 beforeEach(() => {
@@ -157,3 +157,13 @@ test('tasks should be added for todolist', () => {
 	expect(endState['todolistId2'].length).toBe(0)
 })
 
+test('tasks object must be empty after logout', () => {
+
+	const action = todolistsActions.clearTodosData()
+
+	const endState = tasksReducer(startState, action)
+
+	expect(startState['todolistId2'].length).toBe(3)
+	expect(endState).toStrictEqual({})
+
+})

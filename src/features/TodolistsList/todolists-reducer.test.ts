@@ -82,6 +82,14 @@ test('correct entity status of todolist should be changed', () => {
 	expect(endState[0].entityStatus).toBe('idle')
 	expect(endState[1].entityStatus).toBe(newStatus)
 })
+test('todolists array must be empty after logout', () => {
 
+	const action = todolistsActions.clearTodosData()
+
+	const endState = todolistsReducer(startState, action)
+
+	expect(startState.length).toBe(2)
+	expect(endState.length).toBe(0)
+})
 
 
